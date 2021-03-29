@@ -1,12 +1,6 @@
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { refresh } from "../redux/actions";
-function Title() {
-  const dispatch = useDispatch();
+import React from "react";
 
-  useEffect(() => {
-    dispatch(refresh());
-  }, []);
+function Title() {
   return (
     <div style={{ margin: "100px", textAlign: "center" }}>
       <h1>MyLocations</h1>

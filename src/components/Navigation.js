@@ -1,11 +1,15 @@
 import React from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { refresh } from "../redux/actions";
 
 function Navigation({ list, setEditTitle, remove, setShowDetails }) {
+  const dispatch = useDispatch();
+
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-      <Link to="/">
+      <Link to="/" onClick={() => dispatch(refresh())}>
         <Navbar.Brand>myLocations</Navbar.Brand>
       </Link>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />

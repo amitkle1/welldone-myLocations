@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Form, Col, Button, Alert } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { addToList, refresh } from "../../redux/actions";
