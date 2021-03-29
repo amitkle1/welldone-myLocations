@@ -1,5 +1,7 @@
 import React from "react";
-import { Container, Row } from "react-bootstrap";
+import { Container, Row, Button } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { refresh } from "../redux/actions";
 import List from "./Category/List";
 import Details from "./Category/Details";
 
@@ -13,12 +15,17 @@ function Main({
   remove,
   handleSelected,
 }) {
+  const dispatch = useDispatch();
   return (
     <React.Fragment>
       <Container>
-        <Row>
+        <Row style={{ display: "flex", justifyContent: "center" }}>
+          <Button variant="primary" onClick={() => dispatch(refresh())}>
+            Clear Choice
+          </Button>
           <List list={list} handleSelected={handleSelected} />
-          {list.length > 0 && (
+
+          {list.length > 0 && list.some((obj) => obj.isSelected === true) && (
             <Details
               detailsId={detailsId}
               list={list}

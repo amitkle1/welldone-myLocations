@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Form, Col, Button, Alert } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { addToList, refresh } from "../../redux/actions";
+import { useHistory } from "react-router-dom";
 
 function AddItem({ duplicate, setDuplicate }) {
   const [categoryName, setCategoryName] = useState("");
@@ -22,13 +23,13 @@ function AddItem({ duplicate, setDuplicate }) {
       setCategoryName("");
       setDuplicate(false);
       dispatch(refresh());
-      window.location.href = "/main";
+      history.push("/main");
     } else {
       setCategoryName("");
       setDuplicate(true);
     }
   };
-
+  let history = useHistory();
   return (
     <Form style={{ width: "70%", margin: "0 auto" }}>
       <Form.Row>

@@ -17,7 +17,8 @@ const listReducer = (state = [], action) => {
     case "SELECTED": {
       const newArray = [...state];
       newArray.map((item) => (item.isSelected = false));
-      newArray[action.payload].isSelected = true;
+      newArray[action.payload].isSelected = !newArray[action.payload]
+        .isSelected;
       return newArray;
     }
     case "REFRESH": {

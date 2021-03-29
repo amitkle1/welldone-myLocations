@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Card, Container } from "react-bootstrap";
 import Item from "./Item";
+import { useDispatch } from "react-redux";
+import { refresh } from "../../redux/actions";
 
 function List({ list, handleSelected }) {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(refresh());
+  }, []);
+
   return (
     <Container>
       <h1>Category List</h1>
@@ -16,6 +24,7 @@ function List({ list, handleSelected }) {
                 idx={idx}
                 item={item}
                 handleSelected={handleSelected}
+                list={list}
               />
             );
           })}

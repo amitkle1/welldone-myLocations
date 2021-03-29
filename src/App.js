@@ -40,7 +40,12 @@ function App() {
   return (
     <React.Fragment>
       <Router>
-        <Navbar editTitle={editTitle} showDetails={showDetails} list={list} />
+        <Navbar
+          setEditTitle={setEditTitle}
+          showDetails={showDetails}
+          list={list}
+          remove={remove}
+        />
         <Title />
         <Switch>
           <Route exact path="/main">
