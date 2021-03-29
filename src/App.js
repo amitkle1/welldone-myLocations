@@ -22,7 +22,6 @@ function App() {
   const handleSelected = (id) => {
     dispatch(updateList(id));
     setDetailsId(id);
-    setShowDetails(true);
     setEditTitle(false);
   };
 
@@ -42,7 +41,7 @@ function App() {
       <Router>
         <Navbar
           setEditTitle={setEditTitle}
-          showDetails={showDetails}
+          setShowDetails={setShowDetails}
           list={list}
           remove={remove}
         />
