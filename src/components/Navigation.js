@@ -3,10 +3,30 @@ import { Navbar, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { refresh } from "../redux/actions";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 
 function Navigation({ list, setEditTitle, remove, setShowDetails }) {
   const dispatch = useDispatch();
-
+  const submit = () => {
+    confirmAlert({
+      title: "Are you sure?",
+      message: "Are you sure you want to delete this category?",
+      buttons: [
+        {
+          label: "Yes",
+          onClick: () =>
+            remove(list.findIndex((obj) => obj.isSelected === true)),
+        },
+        {
+          label: "No",
+          onClick: () => {
+            return;
+          },
+        },
+      ],
+    });
+  };
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Link to="/" onClick={() => dispatch(refresh())}>
@@ -32,12 +52,7 @@ function Navigation({ list, setEditTitle, remove, setShowDetails }) {
               >
                 Edit
               </Nav.Link>{" "}
-              <Nav.Link
-                onClick={() =>
-                  remove(list.findIndex((obj) => obj.isSelected === true))
-                }
-                style={{ color: "#fff" }}
-              >
+              <Nav.Link onClick={() => submit()} style={{ color: "#fff" }}>
                 Delete
               </Nav.Link>
               <Nav.Link

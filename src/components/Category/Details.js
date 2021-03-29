@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Card, Button, Form } from "react-bootstrap";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 
 function Details({
   detailsId,
@@ -11,7 +13,24 @@ function Details({
   setEditTitle,
 }) {
   const [name, setName] = useState("");
-
+  const submit = () => {
+    confirmAlert({
+      title: "Are you sure?",
+      message: "Are you sure you want to delete this category?",
+      buttons: [
+        {
+          label: "Yes",
+          onClick: () => remove(detailsId),
+        },
+        {
+          label: "No",
+          onClick: () => {
+            return;
+          },
+        },
+      ],
+    });
+  };
   return (
     showDetails && (
       <Card style={{ width: "25rem", margin: "50px" }}>
@@ -41,7 +60,7 @@ function Details({
           >
             EDIT
           </Button>{" "}
-          <Button variant="danger" onClick={() => remove(detailsId)}>
+          <Button variant="danger" onClick={() => submit()}>
             DELETE
           </Button>
           {editTitle && (
