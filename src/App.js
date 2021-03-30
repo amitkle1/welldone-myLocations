@@ -23,6 +23,7 @@ function App() {
     dispatch(updateList(id));
     setDetailsId(id);
     setEditTitle(false);
+    setShowDetails(true);
   };
 
   const remove = (id) => {
