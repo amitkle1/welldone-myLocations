@@ -1,11 +1,16 @@
 import React from "react";
+import { Container } from "react-bootstrap";
+import logo from "../assets/myloc.jpg";
 
 function Title() {
   return (
-    <div style={{ margin: "100px", textAlign: "center" }}>
-      <h1>MyLocations</h1>
-      <h3>Please select an action from the navbar </h3>
-    </div>
+    <Container>
+      <div style={{ textAlign: "center" }}>
+        <h1>MyLocations</h1>
+        <img src={logo} alt="logo" />
+        <h3>Please select an action from the navbar </h3>
+      </div>
+    </Container>
   );
 }
 
