@@ -7,7 +7,11 @@ function Title() {
     <Container>
       <div style={{ textAlign: "center" }}>
         <h1>MyLocations</h1>
-        <img src={logo} alt="logo" />
+        <img
+          style={{ width: "200px", height: "200px" }}
+          src={logo}
+          alt="logo"
+        />
         <h3>Please select an action from the navbar </h3>
       </div>
     </Container>
