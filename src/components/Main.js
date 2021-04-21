@@ -16,6 +16,8 @@ function Main({
   handleSelected,
   isCategory,
   setIsCategory,
+  viewport,
+  setViewport,
 }) {
   const [category, setCategory] = useState(null);
   const dispatch = useDispatch();
@@ -77,6 +79,8 @@ function Main({
               editTitle={editTitle}
               setEditTitle={setEditTitle}
               isCategory={isCategory}
+              viewport={viewport}
+              setViewport={setViewport}
             />
           )}
         </Row>

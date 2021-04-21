@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { Card, Button, Form } from "react-bootstrap";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
@@ -12,6 +13,8 @@ function Details({
   editTitle,
   setEditTitle,
   isCategory,
+  viewport,
+  setViewport,
 }) {
   const [name, setName] = useState("");
   const submit = () => {
@@ -64,6 +67,24 @@ function Details({
                 {"coordinates: " + list[detailsId].coordinates}
               </Card.Text>
               <Card.Text>{"category: " + list[detailsId].category}</Card.Text>
+              <Link to="/map">
+                <Button
+                  variant="warning"
+                  onClick={() => {
+                    setViewport({
+                      ...viewport,
+                      longitude: parseFloat(
+                        list[detailsId].coordinates.split(",")[1]
+                      ),
+                      latitude: parseFloat(
+                        list[detailsId].coordinates.split(",")[0]
+                      ),
+                    });
+                  }}
+                >
+                  VIEW ON MAP
+                </Button>{" "}
+              </Link>
             </>
           )}
           <Button

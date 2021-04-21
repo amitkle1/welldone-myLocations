@@ -10,6 +10,7 @@ import AddLocation from "./components/Location/AddItem";
 import Title from "./components/Title";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import Map from "./components/Map";
 
 import {
   updateList,
@@ -33,6 +34,13 @@ function App() {
   const [locationId, setLocationId] = useState();
   const [showLocation, setShowLocation] = useState(false);
   const [editLocationTitle, setEditLocationTitle] = useState(false);
+  const [viewport, setViewport] = useState({
+    width: 400,
+    height: 400,
+    longitude: -3.70379,
+    latitude: 40.416775,
+    zoom: 10,
+  });
   //duplicate?
   ///
   const list = useSelector((state) => state.listReducer);
@@ -105,6 +113,8 @@ function App() {
               setDuplicate={setDuplicate}
               isCategory={isCategory}
               setIsCategory={setIsCategory}
+              viewport={viewport}
+              setViewport={setViewport}
             />
           </Route>
           <Route exact path="/add-item">
@@ -121,6 +131,9 @@ function App() {
                 list={list.locations}
               />
             )}
+          </Route>
+          <Route exact path="/map">
+            <Map viewport={viewport} setViewport={setViewport} />
           </Route>
         </Switch>
         <Navbar
