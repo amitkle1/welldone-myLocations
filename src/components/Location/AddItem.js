@@ -10,13 +10,9 @@ function AddItem({ duplicate, setDuplicate }) {
   const [coordinates, setCoordinates] = useState("");
   const [category, setCategory] = useState("");
   const [isCatrgory, setIsCategory] = useState(false);
-
+  const [isValid, setIsValid] = useState(false);
   const list = useSelector((state) => state.listReducer);
   const dispatch = useDispatch();
-
-  const locationHandler = (e) => {
-    setLocationName(e.target.value);
-  };
 
   const locationSumbitHandler = () => {
     if (
@@ -24,6 +20,18 @@ function AddItem({ duplicate, setDuplicate }) {
         (obj) => obj.name.toLowerCase() === locationName.toLowerCase()
       )
     ) {
+      if (
+        !coordinates.includes(",") ||
+        parseFloat(coordinates.split(",")[0]) < -90 ||
+        parseFloat(coordinates.split(",")[0]) > 90 ||
+        parseFloat(coordinates.split(",")[1]) < -180 ||
+        parseFloat(coordinates.split(",")[1]) > 180
+      ) {
+        setIsValid(true);
+        return;
+      }
+      setIsValid(false);
+
       setDuplicate(false);
       if (category) {
         dispatch(
@@ -71,7 +79,7 @@ function AddItem({ duplicate, setDuplicate }) {
 
       <Form.Control
         value={coordinates}
-        placeholder="Location Coordinates"
+        placeholder="Location Coordinates - (latitude,longiture) "
         onChange={(e) => {
           setCoordinates(e.target.value);
         }}
@@ -91,6 +99,12 @@ function AddItem({ duplicate, setDuplicate }) {
         <Alert variant="danger">Location ALREADY ON THE LIST</Alert>
       )}
       {isCatrgory && <Alert variant="danger">Please select a category</Alert>}
+      {isValid && (
+        <Alert variant="danger">
+          Please enter valid coordinates (latitude,longiture) The latitude must
+          be a number between -90 and 90 and the longitude between -180 and 180.
+        </Alert>
+      )}
     </Form>
   );
 }
