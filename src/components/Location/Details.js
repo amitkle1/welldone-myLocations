@@ -11,7 +11,6 @@ function Details({
   update,
   editTitle,
   setEditTitle,
-  isCategory,
 }) {
   const [name, setName] = useState("");
   const submit = () => {
@@ -51,21 +50,9 @@ function Details({
               }}
             />
           )}
-          {isCategory ? (
-            <Card.Text>
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </Card.Text>
-          ) : (
-            <>
-              {" "}
-              <Card.Text>{"address: " + list[detailsId].address}</Card.Text>
-              <Card.Text>
-                {"coordinates: " + list[detailsId].coordinates}
-              </Card.Text>
-              <Card.Text>{"category: " + list[detailsId].category}</Card.Text>
-            </>
-          )}
+          <Card.Text>{"address: " + list[detailsId].address}</Card.Text>
+          <Card.Text>{"coordinates: " + list[detailsId].coordinates}</Card.Text>
+          <Card.Text>{"category: " + list[detailsId].category}</Card.Text>
           <Button
             variant="primary"
             onClick={() => setEditTitle((prev) => !prev)}
@@ -82,7 +69,6 @@ function Details({
               onClick={() => {
                 update(detailsId, name);
                 setEditTitle((prev) => !prev);
-                setName("");
               }}
             >
               UPDATE

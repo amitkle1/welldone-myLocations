@@ -4,7 +4,7 @@ import Item from "./Item";
 import { useDispatch } from "react-redux";
 import { refresh } from "../../redux/actions";
 
-function List({ list, handleSelected }) {
+function List({ list, handleSelected, listName, category }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -13,20 +13,32 @@ function List({ list, handleSelected }) {
 
   return (
     <Container>
-      <h1>Category List</h1>
+      <h1>{listName}</h1>
 
       {list.length > 0 ? (
         <Card style={{ width: "18rem" }}>
           {list?.map((item, idx) => {
-            return (
-              <Item
-                key={idx}
-                idx={idx}
-                item={item}
-                handleSelected={handleSelected}
-                list={list}
-              />
-            );
+            if (!category) {
+              return (
+                <Item
+                  key={idx}
+                  idx={idx}
+                  item={item}
+                  handleSelected={handleSelected}
+                  list={list}
+                />
+              );
+            } else if (item.category === category) {
+              return (
+                <Item
+                  key={idx}
+                  idx={idx}
+                  item={item}
+                  handleSelected={handleSelected}
+                  list={list}
+                />
+              );
+            }
           })}
         </Card>
       ) : (

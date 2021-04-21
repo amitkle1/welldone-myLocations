@@ -1,22 +1,25 @@
 import React, { useState } from "react";
 import { Form, Col, Button, Alert } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { addToList, refresh } from "../../redux/actions";
+import { addToList, refresh, addToLocations } from "../../redux/actions";
 import { useHistory } from "react-router-dom";
 
 function AddItem({ duplicate, setDuplicate }) {
   const [categoryName, setCategoryName] = useState("");
-
+  const [locationName, setLocationName] = useState("");
   const list = useSelector((state) => state.listReducer);
   const dispatch = useDispatch();
 
   const nameHandler = (e) => {
     setCategoryName(e.target.value);
   };
+  const locationHandler = (e) => {
+    setLocationName(e.target.value);
+  };
   const onSumbitHandler = () => {
     if (
-      !list.find(
-        (obj) => obj.name.toLowerCase() === categoryName.toLocaleLowerCase()
+      !list.category.find(
+        (obj) => obj.name.toLowerCase() === categoryName.toLowerCase()
       )
     ) {
       dispatch(addToList({ name: categoryName, isSelected: false }));
@@ -26,6 +29,21 @@ function AddItem({ duplicate, setDuplicate }) {
       history.push("/main");
     } else {
       setCategoryName("");
+      setDuplicate(true);
+    }
+  };
+  const locationSumbitHandler = () => {
+    if (
+      !list.locations.find(
+        (obj) => obj.name.toLowerCase() === categoryName.toLocaleLowerCase()
+      )
+    ) {
+      dispatch(addToLocations({ name: locationName, isSelected: false }));
+      setLocationName("");
+      setDuplicate(false);
+      dispatch(refresh());
+    } else {
+      setLocationName("");
       setDuplicate(true);
     }
   };

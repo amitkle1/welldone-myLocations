@@ -6,7 +6,13 @@ import { refresh } from "../redux/actions";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 
-function Navigation({ list, setEditTitle, remove, setShowDetails }) {
+function Navigation({
+  list,
+  setEditTitle,
+  remove,
+  setShowDetails,
+  isCategory,
+}) {
   const dispatch = useDispatch();
   const submit = () => {
     confirmAlert({
@@ -38,10 +44,10 @@ function Navigation({ list, setEditTitle, remove, setShowDetails }) {
           {!list.some((element) => element.isSelected === true) ? (
             <>
               <Link to="/main" style={{ color: "#fff" }}>
-                Category List
+                {isCategory ? "Category" : "Locations"} List
               </Link>
               <Link to="/add-item" style={{ color: "#fff" }}>
-                New Category
+                New {isCategory ? "Category" : "Location"}
               </Link>
             </>
           ) : (
