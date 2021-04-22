@@ -1,7 +1,7 @@
 import React from "react";
 import { ListGroup } from "react-bootstrap";
 
-function Item({ item, idx, handleSelected }) {
+function Item({ item, idx, handleSelected, isCategory }) {
   return (
     <ListGroup variant="flush">
       <ListGroup.Item
@@ -9,7 +9,7 @@ function Item({ item, idx, handleSelected }) {
         variant={item.isSelected === true ? "warning" : null}
         style={{ cursor: "pointer" }}
       >
-        {item.name}
+        {isCategory ? item.name : item.name + " (" + item.category + ")"}
       </ListGroup.Item>
     </ListGroup>
   );

@@ -4,7 +4,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Navbar } from "react-bootstrap";
 import Navigationbar from "./components/Navigation";
 import Main from "./components/Main";
-import MainLocations from "./components/Location/MainLocations";
 import AddItem from "./components/Category/AddItem";
 import AddLocation from "./components/Location/AddItem";
 import Title from "./components/Title";
@@ -30,19 +29,18 @@ function App() {
   const [editTitle, setEditTitle] = useState(false);
   const [duplicate, setDuplicate] = useState(false);
 
-  ///
   const [locationId, setLocationId] = useState();
   const [showLocation, setShowLocation] = useState(false);
   const [editLocationTitle, setEditLocationTitle] = useState(false);
   const [viewport, setViewport] = useState({
     width: 400,
     height: 400,
-    longitude: -3.70379,
-    latitude: 40.416775,
+    longitude: 34.855499,
+    latitude: 32.109333,
     zoom: 10,
   });
-  //duplicate?
-  ///
+  const [coordinates, setCoordinates] = useState("");
+
   const list = useSelector((state) => state.listReducer);
 
   const dispatch = useDispatch();
@@ -129,11 +127,17 @@ function App() {
                 duplicate={duplicate}
                 setDuplicate={setDuplicate}
                 list={list.locations}
+                coordinates={coordinates}
+                setCoordinates={setCoordinates}
               />
             )}
           </Route>
           <Route exact path="/map">
-            <Map viewport={viewport} setViewport={setViewport} />
+            <Map
+              viewport={viewport}
+              setViewport={setViewport}
+              setCoordinates={setCoordinates}
+            />
           </Route>
         </Switch>
         <Navbar

@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import { Form, Col, Button, Alert } from "react-bootstrap";
+import { Form, Row, Col, Button, Alert } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { refresh, addToLocations } from "../../redux/actions";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
-function AddItem({ duplicate, setDuplicate }) {
+function AddItem({ duplicate, setDuplicate, coordinates, setCoordinates }) {
   const [locationName, setLocationName] = useState("");
   const [address, setAddress] = useState("");
-  const [coordinates, setCoordinates] = useState("");
   const [category, setCategory] = useState("");
   const [isCatrgory, setIsCategory] = useState(false);
   const [isValid, setIsValid] = useState(false);
@@ -45,6 +44,7 @@ function AddItem({ duplicate, setDuplicate }) {
         );
         setLocationName("");
         setIsCategory(false);
+        setCoordinates("");
         dispatch(refresh());
         history.push("/main");
       } else {
@@ -58,6 +58,24 @@ function AddItem({ duplicate, setDuplicate }) {
   let history = useHistory();
   return (
     <Form style={{ width: "70%", margin: "0 auto" }}>
+      <Form.Label>Location Coordinates</Form.Label>
+      <Row>
+        <Col>
+          <Form.Control
+            value={coordinates}
+            placeholder="Location Coordinates - (latitude,longiture) "
+            onChange={(e) => {
+              setCoordinates(e.target.value);
+            }}
+          />
+        </Col>
+        <Col>
+          <Link to="/map">
+            {" "}
+            <Button variant="warning">Choose from map</Button>{" "}
+          </Link>
+        </Col>
+      </Row>
       <Form.Label>Location Name</Form.Label>
       <Form.Control
         value={locationName}
@@ -75,15 +93,7 @@ function AddItem({ duplicate, setDuplicate }) {
           setAddress(e.target.value);
         }}
       />
-      <Form.Label>Location Coordinates</Form.Label>
 
-      <Form.Control
-        value={coordinates}
-        placeholder="Location Coordinates - (latitude,longiture) "
-        onChange={(e) => {
-          setCoordinates(e.target.value);
-        }}
-      />
       <Form.Label>Category</Form.Label>
 
       <Form.Control as="select" onChange={(e) => setCategory(e.target.value)}>

@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { Card, Button, Form } from "react-bootstrap";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
+import { useDispatch } from "react-redux";
+import { refresh } from "../redux/actions";
 
 function Details({
   detailsId,
@@ -11,8 +14,21 @@ function Details({
   update,
   editTitle,
   setEditTitle,
+  isCategory,
+  viewport,
+  setViewport,
 }) {
   const [name, setName] = useState("");
+  const dispatch = useDispatch();
+  const viewHandler = () => {
+    setViewport({
+      ...viewport,
+      longitude: parseFloat(list[detailsId].coordinates.split(",")[1]),
+      latitude: parseFloat(list[detailsId].coordinates.split(",")[0]),
+    });
+    dispatch(refresh());
+  };
+
   const submit = () => {
     confirmAlert({
       title: "Are you sure?",
@@ -50,9 +66,26 @@ function Details({
               }}
             />
           )}
-          <Card.Text>{"address: " + list[detailsId].address}</Card.Text>
-          <Card.Text>{"coordinates: " + list[detailsId].coordinates}</Card.Text>
-          <Card.Text>{"category: " + list[detailsId].category}</Card.Text>
+          {isCategory ? (
+            <Card.Text>
+              Some quick example text to build on the card title and make up the
+              bulk of the card's content.
+            </Card.Text>
+          ) : (
+            <>
+              {" "}
+              <Card.Text>{"address: " + list[detailsId].address}</Card.Text>
+              <Card.Text>
+                {"coordinates: " + list[detailsId].coordinates}
+              </Card.Text>
+              <Card.Text>{"category: " + list[detailsId].category}</Card.Text>
+              <Link to="/map">
+                <Button variant="warning" onClick={viewHandler}>
+                  VIEW ON MAP
+                </Button>{" "}
+              </Link>
+            </>
+          )}
           <Button
             variant="primary"
             onClick={() => setEditTitle((prev) => !prev)}
@@ -64,11 +97,13 @@ function Details({
           </Button>
           {editTitle && (
             <Button
+              className={"m-0"}
               style={{ marginLeft: "50px" }}
               variant="success"
               onClick={() => {
                 update(detailsId, name);
                 setEditTitle((prev) => !prev);
+                setName("");
               }}
             >
               UPDATE

@@ -1,11 +1,23 @@
 import React from "react";
-import ReactMapGL, { Marker } from "react-map-gl";
+import ReactMapGL, { Marker, NavigationControl } from "react-map-gl";
+import { useHistory } from "react-router-dom";
 
-function Map({ viewport, setViewport }) {
+const navControlStyle = {
+  right: 10,
+  top: 10,
+};
+
+function Map({ viewport, setViewport, setCoordinates }) {
+  const history = useHistory();
+  const getLocation = (e) => {
+    setCoordinates(e.lngLat[1] + "," + e.lngLat[0]);
+    history.push("/add-item");
+  };
   return (
     <>
       {" "}
       <ReactMapGL
+        onClick={(e) => getLocation(e)}
         style={{ margin: "0 auto" }}
         mapStyle="mapbox://styles/mapbox/streets-v11"
         mapboxApiAccessToken={
@@ -20,7 +32,8 @@ function Map({ viewport, setViewport }) {
             width={50}
             height={50}
           />
-        </Marker>
+        </Marker>{" "}
+        <NavigationControl style={navControlStyle} />
       </ReactMapGL>
     </>
   );

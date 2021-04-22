@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import { Card, Container } from "react-bootstrap";
 import Item from "./Item";
 import { useDispatch } from "react-redux";
-import { refresh } from "../../redux/actions";
+import { refresh } from "../redux/actions";
 
-function List({ list, handleSelected, listName, category }) {
+function List({ list, handleSelected, listName, category, isCategory }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -26,6 +26,7 @@ function List({ list, handleSelected, listName, category }) {
                   item={item}
                   handleSelected={handleSelected}
                   list={list}
+                  isCategory={isCategory}
                 />
               );
             } else if (item.category === category) {

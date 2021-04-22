@@ -50,6 +50,8 @@ function AddItem({ duplicate, setDuplicate }) {
   let history = useHistory();
   return (
     <Form style={{ width: "70%", margin: "0 auto" }}>
+      <Form.Label> Category Name</Form.Label>
+
       <Form.Row>
         <Col>
           <Form.Control

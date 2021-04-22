@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Container, Row, Button, Col, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { refresh, sortLocations, groupByLocations } from "../redux/actions";
-import List from "./Category/List";
-import Details from "./Category/Details";
+import List from "./List";
+import Details from "./Details";
 
 function Main({
   detailsId,
@@ -30,43 +30,51 @@ function Main({
   return (
     <React.Fragment>
       <Container>
-        <Row
-          style={{
-            display: "flex",
-            justifySelf: "center",
-            justifyContent: "center",
-          }}
-        >
+        <Row>
           <Col>
             <List
               list={list}
               handleSelected={handleSelected}
               listName={isCategory ? "Category List" : "Locations List"}
               category={category}
+              isCategory={isCategory}
             />
-            <Button variant="primary" onClick={() => dispatch(refresh())}>
-              Clear Choice
-            </Button>{" "}
-            {!isCategory && (
-              <>
-                <Button onClick={sortHandler}>SORT BY NAME</Button>
-                <Button onClick={() => dispatch(groupByLocations())}>
-                  Group By Category
-                </Button>
-                <Form.Group style={{ width: "fit-content" }}>
-                  <Form.Label>Filter by Category</Form.Label>
-                  <Form.Control
-                    as="select"
-                    onChange={(e) => setCategory(e.target.value)}
+            <Container>
+              <Button
+                variant="outline-primary"
+                onClick={() => dispatch(refresh())}
+              >
+                Clear Choice
+              </Button>{" "}
+              {!isCategory && (
+                <>
+                  <Button variant="outline-info" onClick={sortHandler}>
+                    SORT BY NAME
+                  </Button>
+                  <Button
+                    variant="outline-success"
+                    onClick={() => {
+                      setCategory("");
+                      dispatch(groupByLocations());
+                    }}
                   >
-                    <option></option>
-                    {categories.map((category) => (
-                      <option>{category.name}</option>
-                    ))}
-                  </Form.Control>
-                </Form.Group>
-              </>
-            )}
+                    Group By Category
+                  </Button>
+                  <Form.Group style={{ width: "fit-content" }}>
+                    <Form.Label>Filter by Category</Form.Label>
+                    <Form.Control
+                      as="select"
+                      onChange={(e) => setCategory(e.target.value)}
+                    >
+                      <option></option>
+                      {categories.map((category, idx) => (
+                        <option key={idx}>{category.name}</option>
+                      ))}
+                    </Form.Control>
+                  </Form.Group>
+                </>
+              )}
+            </Container>
           </Col>
 
           {list.length > 0 && list.some((obj) => obj.isSelected === true) && (
