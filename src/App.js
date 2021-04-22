@@ -59,7 +59,6 @@ function App() {
   };
 
   const update = (id, name) => {
-    // console.log()
     if (name) {
       dispatch(updateItem(id, name));
     }
@@ -75,9 +74,9 @@ function App() {
     dispatch(removeLocation(id));
     setShowDetails(false);
   };
-  const updateLocationInList = (id, name) => {
+  const updateLocationInList = (id, name, address, cat) => {
     if (name) {
-      dispatch(updateLocation(id, name));
+      dispatch(updateLocation(id, name, address, cat));
     }
   };
 

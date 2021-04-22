@@ -1,4 +1,5 @@
 const listReducer = (state = { category: [], locations: [] }, action) => {
+  //categories
   switch (action.type) {
     case "ADD":
       return { ...state, category: [...state.category, action.payload] };
@@ -49,6 +50,8 @@ const listReducer = (state = { category: [], locations: [] }, action) => {
     case "UPDATE_LOCATION": {
       const newArray = { ...state };
       newArray.locations[action.payload].name = action.name;
+      newArray.locations[action.payload].address = action.address;
+      newArray.locations[action.payload].category = action.cat;
 
       return newArray;
     }

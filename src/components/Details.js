@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Card, Button, Form } from "react-bootstrap";
+import { Card, Button, Form, Alert } from "react-bootstrap";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import { useDispatch } from "react-redux";
@@ -17,8 +17,13 @@ function Details({
   isCategory,
   viewport,
   setViewport,
+  categories,
 }) {
   const [name, setName] = useState("");
+
+  const [address, setAddress] = useState("");
+  const [locationsCategory, setLocationsCategory] = useState("");
+  const [alert, setAlert] = useState(false);
   const dispatch = useDispatch();
   const viewHandler = () => {
     setViewport({
@@ -77,6 +82,40 @@ function Details({
               Some quick example text to build on the card title and make up the
               bulk of the card's content.
             </Card.Text>
+          ) : editTitle ? (
+            <>
+              {" "}
+              <Form.Control
+                value={address}
+                style={{ textAlign: "center" }}
+                type="text"
+                placeholder="Enter address..."
+                onChange={(e) => {
+                  setAddress(e.target.value);
+                }}
+              />
+              <Form.Group style={{ width: "fit-content" }}>
+                <Form.Label>Filter by Category</Form.Label>
+                <Form.Control
+                  as="select"
+                  onChange={(e) => setLocationsCategory(e.target.value)}
+                >
+                  <option></option>
+                  {categories.map((category, idx) => (
+                    <option key={idx}>{category.name}</option>
+                  ))}
+                </Form.Control>
+              </Form.Group>
+              <Card.Text>
+                {"coordinates: " + list[detailsId].coordinates}
+              </Card.Text>
+              {alert && <Alert variant="danger">please edit all inputs</Alert>}
+              <Link to="/map">
+                <Button variant="warning" onClick={viewHandler}>
+                  VIEW ON MAP
+                </Button>{" "}
+              </Link>
+            </>
           ) : (
             <>
               {" "}
@@ -107,9 +146,16 @@ function Details({
               style={{ marginLeft: "50px" }}
               variant="success"
               onClick={() => {
-                update(detailsId, name);
-                setEditTitle((prev) => !prev);
-                setName("");
+                if ((!name || !address || !locationsCategory) && !isCategory) {
+                  setAlert(true);
+                } else {
+                  setAlert(false);
+                  update(detailsId, name, address, locationsCategory);
+                  setEditTitle((prev) => !prev);
+                  setName("");
+                  setAddress("");
+                  setLocationsCategory("");
+                }
               }}
             >
               UPDATE

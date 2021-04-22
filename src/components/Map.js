@@ -31,6 +31,7 @@ function Map({ viewport, setViewport, setCoordinates }) {
             src="https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png"
             width={50}
             height={50}
+            alt="map"
           />
         </Marker>{" "}
         <NavigationControl style={navControlStyle} />

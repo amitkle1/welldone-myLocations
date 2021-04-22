@@ -1,5 +1,4 @@
 import React from "react";
-import { Container } from "react-bootstrap";
 import logo from "../assets/myloc.jpg";
 
 function Title() {

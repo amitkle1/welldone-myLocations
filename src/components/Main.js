@@ -89,6 +89,7 @@ function Main({
               isCategory={isCategory}
               viewport={viewport}
               setViewport={setViewport}
+              categories={categories}
             />
           )}
         </Row>

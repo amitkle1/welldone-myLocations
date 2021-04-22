@@ -38,11 +38,13 @@ export const addToLocations = (item) => {
   };
 };
 
-export const updateLocation = (id, name) => {
+export const updateLocation = (id, name, address, cat) => {
   return {
     type: "UPDATE_LOCATION",
     payload: id,
     name,
+    address,
+    cat,
   };
 };
 export const removeLocation = (id) => {

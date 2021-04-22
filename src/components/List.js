@@ -9,7 +9,7 @@ function List({ list, handleSelected, listName, category, isCategory }) {
 
   useEffect(() => {
     dispatch(refresh());
-  }, []);
+  }, [dispatch]);
 
   return (
     <Container>
