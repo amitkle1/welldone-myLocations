@@ -42,8 +42,10 @@ function List({ list, handleSelected, listName, category, isCategory }) {
             }
           })}
         </Card>
-      ) : (
+      ) : isCategory ? (
         <h3>Category List Is Empty</h3>
+      ) : (
+        <h3>Locations List Is Empty</h3>
       )}
     </Container>
   );

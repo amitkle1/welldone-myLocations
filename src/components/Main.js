@@ -39,7 +39,7 @@ function Main({
               category={category}
               isCategory={isCategory}
             />
-            <Container>
+            <Container style={{ marginBottom: "100px" }}>
               <Button
                 variant="outline-primary"
                 onClick={() => dispatch(refresh())}

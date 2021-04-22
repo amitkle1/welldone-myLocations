@@ -49,7 +49,13 @@ function Details({
   };
   return (
     showDetails && (
-      <Card style={{ width: "25rem", margin: "50px" }}>
+      <Card
+        style={{
+          width: "25rem",
+          height: "fit-content",
+          margin: "50px auto",
+        }}
+      >
         <Card.Body>
           {!editTitle ? (
             <Card.Title style={{ textAlign: "center" }}>

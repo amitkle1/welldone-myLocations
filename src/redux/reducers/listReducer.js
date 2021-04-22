@@ -5,7 +5,14 @@ const listReducer = (state = { category: [], locations: [] }, action) => {
 
     case "UPDATE": {
       const newArray = { ...state };
+      const categoryName = newArray.category[action.payload].name;
+
       newArray.category[action.payload].name = action.name;
+      newArray.locations.map((location) => {
+        if (location.category === categoryName) {
+          location.category = action.name;
+        }
+      });
       return newArray;
     }
     case "REMOVE": {

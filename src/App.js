@@ -58,11 +58,12 @@ function App() {
   };
 
   const update = (id, name) => {
+    // console.log()
     if (name) {
       dispatch(updateItem(id, name));
     }
   };
-  ///
+
   const handleSelectedLocation = (id) => {
     dispatch(updateLocations(id));
     setLocationId(id);
@@ -152,14 +153,20 @@ function App() {
             <Navbar.Brand>myLocations</Navbar.Brand>
           </Link>
           <Link
-            onClick={() => setIsCategory(true)}
+            onClick={() => {
+              dispatch(refresh());
+              setIsCategory(true);
+            }}
             to="/main"
             style={{ color: "#000" }}
           >
             Category
           </Link>{" "}
           <Link
-            onClick={() => setIsCategory(false)}
+            onClick={() => {
+              dispatch(refresh());
+              setIsCategory(false);
+            }}
             to="/main"
             style={{ color: "#000" }}
           >
