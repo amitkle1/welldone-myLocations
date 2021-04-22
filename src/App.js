@@ -23,15 +23,18 @@ import {
 import "./App.css";
 
 function App() {
+  //mutual states
   const [isCategory, setIsCategory] = useState(true);
   const [detailsId, setDetailsId] = useState();
   const [showDetails, setShowDetails] = useState(false);
   const [editTitle, setEditTitle] = useState(false);
   const [duplicate, setDuplicate] = useState(false);
 
+  //location states
   const [locationId, setLocationId] = useState();
   const [showLocation, setShowLocation] = useState(false);
   const [editLocationTitle, setEditLocationTitle] = useState(false);
+  const [coordinates, setCoordinates] = useState("");
   const [viewport, setViewport] = useState({
     width: 400,
     height: 400,
@@ -39,10 +42,8 @@ function App() {
     latitude: 32.109333,
     zoom: 10,
   });
-  const [coordinates, setCoordinates] = useState("");
 
   const list = useSelector((state) => state.listReducer);
-
   const dispatch = useDispatch();
 
   const handleSelected = (id) => {
@@ -79,8 +80,6 @@ function App() {
       dispatch(updateLocation(id, name));
     }
   };
-
-  ///
 
   return (
     <React.Fragment>
