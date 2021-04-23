@@ -41,7 +41,7 @@ function Navigation({
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto" style={{ display: "flex", gap: "30px" }}>
-          {!list.some((element) => element.isSelected === true) ? (
+          {!list?.some((element) => element.isSelected === true) ? (
             <>
               <Link to="/main" style={{ color: "#fff" }}>
                 {isCategory ? "Category" : "Locations"} List
