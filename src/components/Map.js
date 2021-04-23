@@ -1,5 +1,6 @@
 import React from "react";
 import ReactMapGL, { Marker, NavigationControl } from "react-map-gl";
+
 import { useHistory } from "react-router-dom";
 
 const navControlStyle = {
